@@ -70,17 +70,13 @@ class HBNBCommand(cmd.Cmd):
         return False
 
     def do_quit(self, arg):
-        """To exit the program."""
+        """Quit command to exit the program."""
         return True
 
     def do_EOF(self, arg):
         """To exit the program."""
-        print()
+        print("")
         return True
-
-    def help_quit(self, arg=None):
-        """Help quit."""
-        print("Quit command to exit the program\n")
 
     def do_create(self, arg):
         """Create a new class instance."""
@@ -136,7 +132,15 @@ class HBNBCommand(cmd.Cmd):
             if len(arg_l) == 0 or arg_l[0] == obj.__class__.__name__:
                 obj_l.append(obj.__str__())
         print(obj_l)
-        return obj_l
+
+    def do_count(self, arg):
+        """Retrieve the number of instances of a given class."""
+        arg_l = func(arg)
+        cnt = 0
+        for obj in storage.all().values():
+            if arg_l[0] == obj.__class__.__name__:
+                cnt += 1
+        print(cnt)
 
     def do_update(self, arg):
         """Update a class instance."""
